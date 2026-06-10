@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>TYRIAN — Join the Core</title>
+<meta name="description" content="Apply to join the TYRIAN core team. We are looking for those who find comfort in the chaos." />
+<link rel="icon" type="image/png" href="./assets/tyrian-logo.png" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          background:   "#ffffff",
+          ink:          "#000000",
+          "ink-soft":   "#1a1c1c",
+          "ink-mute":   "#4c4546",
+          hairline:     "#e6e6e6",
+          tyrian:       "#66023C",
+          "tyrian-bright":"#a0376a",
+        },
+        borderRadius: { DEFAULT: "0", none: "0" },
+        spacing: {
+          "section-gap": "160px",
+          gutter: "32px",
+          unit: "8px",
+          "container-max": "1440px",
+          "margin-edge": "64px",
+        },
+        fontFamily: {
+          display: ["Inter", "sans-serif"],
+          body:    ["Geist", "Inter", "sans-serif"],
+          mono:    ["JetBrains Mono", "monospace"],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-family: "Geist", "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  .tyrian-progress {
+    height: 2px; width: 100%;
+    background: #66023C; position: fixed;
+    top: 0; left: 0; z-index: 100;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.15s linear;
+  }
+  .label-mono {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; line-height: 16px;
+    letter-spacing: 0.08em; font-weight: 500;
+    text-transform: uppercase;
+  }
+  .btn {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 600;
+    padding: 14px 22px;
+    border: 1px solid #000;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background .18s ease, color .18s ease, transform .1s ease;
+    cursor: pointer;
+  }
+  .btn-primary    { background: #000; color: #fff; }
+  .btn-primary:hover { background: #66023C; border-color: #66023C; }
+  .btn-ghost      { background: transparent; color: #000; }
+  .btn-ghost:hover{ background: #000; color: #fff; }
+  .btn:active     { transform: translateY(1px); }
+  .status-dot {
+    width: 8px; height: 8px; display: inline-block; background: #66023C;
+  }
+  .form-input-line {
+    border: none;
+    border-bottom: 1px solid #000;
+    background: transparent;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 0;
+    font-family: "Geist", "Inter", sans-serif;
+    font-size: 18px;
+  }
+  .form-input-line:focus {
+    outline: none;
+    border-bottom: 2px solid #66023C;
+  }
+  .industrial-photo { filter: grayscale(1) contrast(1.05) brightness(0.85); }
+  .fade-in { animation: fadeIn .8s ease forwards; opacity: 0; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #000; }
+
+  @media (max-width: 768px) {
+    .margin-edge-x { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (min-width: 769px) {
+    .margin-edge-x { padding-left: 64px; padding-right: 64px; }
+  }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+    height: 1px; background: #66023C; transform: scaleX(0); transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+</style>
+</head>
+<body>
+  <div class="tyrian-progress" id="scrollProgress"></div>
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-black/10">
+    <div class="max-w-[1440px] mx-auto margin-edge-x flex items-center justify-between h-24">
+      <a href="./index.html" class="flex items-center" aria-label="TYRIAN — home">
+        <img src="./assets/tyrian-logo-trim.png" alt="TYRIAN" class="h-10 md:h-12 w-auto select-none" draggable="false" />
+      </a>
+      <div class="flex items-center gap-8">
+        <a href="./index.html" class="hidden md:inline-block nav-link label-mono">← Home</a>
+        <a href="./index.html#waitlist" class="hidden md:inline-block nav-link label-mono">Join the Waitlist</a>
+        <span class="label-mono text-tyrian">Core Team · Hiring</span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="margin-edge-x max-w-[1440px] mx-auto pt-16 md:pt-24 pb-8">
+      <div class="grid grid-cols-12 gap-gutter items-end">
+        <div class="col-span-12 md:col-span-8">
+          <div class="flex items-center gap-3 mb-6 fade-in" style="animation-delay:.05s;">
+            <span class="status-dot"></span>
+            <span class="label-mono text-tyrian">Development Phase · Alpha · Hiring 04 Seats</span>
+          </div>
+          <h1 class="font-display text-[64px] md:text-[160px] leading-[0.85] tracking-[-0.05em] font-extrabold uppercase fade-in" style="animation-delay:.15s;">
+            Join the<br/><span class="text-tyrian">Core.</span>
+          </h1>
+          <p class="font-body text-body-lg text-ink-mute mt-8 max-w-xl fade-in" style="animation-delay:.25s;">
+            This is the team application — not the customer waitlist. If you want early access to H.I.R.A. instead, <a class="underline underline-offset-4 hover:text-tyrian" href="./index.html#waitlist">join the waitlist →</a>
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-4 pb-4 fade-in" style="animation-delay:.3s;">
+          <p class="label-mono text-ink-mute max-w-xs">
+            We are looking for those who find comfort in the chaos. The architects of the next rebellion.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERO IMAGE -->
+    <section class="margin-edge-x max-w-[1440px] mx-auto mt-12 md:mt-24 fade-in" style="animation-delay:.4s;">
+      <div class="w-full aspect-[21/9] overflow-hidden bg-black relative">
+        <img
+          src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1800&q=85&auto=format&fit=crop"
+          alt="Sleek brushed-carbon robotic chassis in a dark atmospheric hangar"
+          class="w-full h-full object-cover industrial-photo"
+          onerror="this.onerror=null;this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuCBlMM_QhhleTghpo212r0vWuMuqhTJ2yzVWfkzXp9IwOvpKSpJfSm3yKX_w89t42LmXU-feAJmfGB4HTViJ7afJgUTOSeer7KxIIlBDh12_xfxe3SfFZiH8_mNAE1O1u5dexpXVpxSk8I1VEIxRG8MqnoCp55-E__hFzzSQQcA1FRdMV5GFJcofsDaryH28ZSWNKNq9MqjEzJXr8AKPRgQUql2GCPza9T7IMRVymVYQINm1fkYjAFSFk6xBapEWC3s6gFyPnC_Wo1V'"
+        />
+        <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex flex-col gap-1 text-white">
+          <span class="label-mono opacity-70">RECRUITMENT CYCLE // 26-Q2</span>
+          <span class="label-mono opacity-70">OPEN SEATS // 04</span>
+        </div>
+        <div class="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-2 text-white">
+          <span class="status-dot"></span>
+          <span class="label-mono">RECEIVING</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATION -->
+    <section class="margin-edge-x max-w-[1440px] mx-auto mt-24 md:mt-section-gap pb-24 md:pb-section-gap grid grid-cols-12 gap-gutter">
+      <div class="col-span-12 md:col-span-4">
+        <div class="md:sticky md:top-28">
+          <span class="label-mono text-ink-mute">// 01</span>
+          <h2 class="font-display text-[40px] md:text-[48px] uppercase font-bold mt-2 mb-6 tracking-tight">Manifesto</h2>
+          <p class="font-body text-[18px] leading-[1.6] text-ink-soft mb-10">
+            TYRIAN is not a company; it is an operating system for the dissatisfied. We build tools that bypass the bureaucratic noise of the status quo.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="status-dot"></span>
+              <span class="label-mono">01 // Total Autonomy</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="status-dot offline" style="background:#000;"></span>
+              <span class="label-mono">02 // Radical Clarity</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="status-dot offline" style="background:#000;"></span>
+              <span class="label-mono">03 // Uncompromising Speed</span>
+            </div>
+          </div>
+
+          <div class="mt-12 hairline-t" style="border-top:1px solid #000; padding-top:24px;">
+            <span class="label-mono text-ink-mute block mb-2">RESPONSE TIME</span>
+            <p class="font-body text-body-sm">Most applications get a reply within <span class="text-tyrian font-mono">72 hours</span>. The rest are quietly archived.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-start-6 md:col-span-7">
+        <div id="applicationContent">
+          <form class="space-y-14" id="applicationForm">
+            <div>
+              <label class="label-mono block mb-3" for="name">001 // Name</label>
+              <input class="form-input-line" id="name" placeholder="Identity string" required type="text" />
+            </div>
+            <div>
+              <label class="label-mono block mb-3" for="email">002 // Email</label>
+              <input class="form-input-line" id="email" placeholder="Communications channel" required type="email" />
+            </div>
+            <div>
+              <label class="label-mono block mb-3" for="who">003 // Who are you?</label>
+              <textarea class="form-input-line resize-none" id="who" placeholder="Describe your architecture" required rows="4"></textarea>
+            </div>
+            <div>
+              <label class="label-mono block mb-3" for="why">004 // Why TYRIAN?</label>
+              <textarea class="form-input-line resize-none" id="why" placeholder="Why join the resistance?" required rows="4"></textarea>
+            </div>
+            <div>
+              <label class="label-mono block mb-3" for="proof">005 // Proof of build <span class="text-ink-mute normal-case tracking-normal">(link to anything you've shipped)</span></label>
+              <input class="form-input-line" id="proof" placeholder="https://" type="url" />
+            </div>
+            <div class="pt-8 flex flex-col items-start gap-4">
+              <button class="btn btn-primary" type="submit" style="padding:18px 36px;">Apply →</button>
+              <p class="label-mono text-ink-mute">By submitting, you acknowledge that there is no turning back.</p>
+            </div>
+          </form>
+
+          <div class="hidden border border-tyrian p-12 md:p-16 fade-in" id="successState">
+            <div class="flex items-center gap-3 mb-8">
+              <span class="status-dot" style="animation:pulse 1.4s ease-in-out infinite;"></span>
+              <span class="label-mono text-tyrian">TRANSMISSION RECEIVED</span>
+            </div>
+            <h3 class="font-display text-[56px] md:text-[88px] text-tyrian uppercase font-extrabold leading-[0.85] tracking-[-0.04em]">
+              Success.
+            </h3>
+            <p class="font-display text-[28px] md:text-[40px] text-ink-soft uppercase font-bold tracking-tight mt-6">
+              Then we'll get back to you.
+            </p>
+            <div class="mt-12 hairline-t" style="border-top:1px solid #000;">
+              <div class="flex justify-between mt-6">
+                <span class="label-mono text-ink-mute">QUEUE POSITION</span>
+                <span class="label-mono text-tyrian" id="queuePosApp">REDACTED</span>
+              </div>
+              <div class="flex justify-between mt-3">
+                <span class="label-mono text-ink-mute">EXPECTED RESPONSE</span>
+                <span class="label-mono">≤ 72H</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white py-12 border-t border-white/10">
+    <div class="max-w-[1440px] mx-auto margin-edge-x flex flex-col md:flex-row justify-between gap-6 items-start md:items-end">
+      <div>
+        <img src="./assets/tyrian-logo-trim.png" alt="TYRIAN" class="h-10 w-auto" style="filter:brightness(0) invert(1);" />
+        <p class="label-mono text-white/50 mt-3">TYRIAN — Built for rebels everywhere</p>
+      </div>
+      <div class="flex gap-8">
+        <a href="https://x.com/sarathnarendrak" target="_blank" rel="noopener noreferrer" class="label-mono text-white hover:text-tyrian-bright">Twitter</a>
+        <a href="https://www.youtube.com/@teamtyrian" target="_blank" rel="noopener noreferrer" class="label-mono text-white hover:text-tyrian-bright">YouTube</a>
+        <a href="https://substack.com/@kuppalasarathnarendra" target="_blank" rel="noopener noreferrer" class="label-mono text-white hover:text-tyrian-bright">Substack</a>
+      </div>
+    </div>
+    <div class="max-w-[1440px] mx-auto margin-edge-x mt-10 pt-6 border-t border-white/10">
+      <p class="label-mono text-white/40">© 2026 TYRIAN CORP · All rights reserved · Secured by rebellion</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll progress
+    const bar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.transform = `scaleX(${winScroll / Math.max(height,1)})`;
+    }, { passive: true });
+
+    // Application submission — stored under "tyrian.coreApplications" (separate from the waitlist)
+    const CORE_KEY = 'tyrian.coreApplications';
+    const readApps = () => {
+      try { return JSON.parse(localStorage.getItem(CORE_KEY) || '[]'); }
+      catch { return []; }
+    };
+    const writeApps = (arr) => localStorage.setItem(CORE_KEY, JSON.stringify(arr));
+
+    const form = document.getElementById('applicationForm');
+    const successState = document.getElementById('successState');
+    const queuePos = document.getElementById('queuePosApp');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const application = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim().toLowerCase(),
+        who: document.getElementById('who').value.trim(),
+        why: document.getElementById('why').value.trim(),
+        proof: document.getElementById('proof').value.trim(),
+        at: new Date().toISOString(),
+      };
+      const apps = readApps();
+      apps.push(application);
+      writeApps(apps);
+
+      form.style.opacity = '0.4';
+      form.style.pointerEvents = 'none';
+      setTimeout(() => {
+        form.classList.add('hidden');
+        successState.classList.remove('hidden');
+        queuePos.textContent = '#' + String(apps.length).padStart(3, '0');
+        successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 1100);
+    });
+
+    // Label micro-interaction
+    document.querySelectorAll('.form-input-line').forEach(input => {
+      input.addEventListener('focus', () => {
+        const label = input.previousElementSibling;
+        if (label) { label.style.color = '#66023C'; label.style.transform = 'translateX(10px)'; label.style.transition = 'all .3s ease'; }
+      });
+      input.addEventListener('blur', () => {
+        const label = input.previousElementSibling;
+        if (label) { label.style.color = ''; label.style.transform = ''; }
+      });
+    });
+  </script>
+</body>
+</html>
