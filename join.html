@@ -299,8 +299,9 @@
       bar.style.transform = `scaleX(${winScroll / Math.max(height,1)})`;
     }, { passive: true });
 
-    // Application submission — stored under "tyrian.coreApplications" (separate from the waitlist)
+    // Application submission — sent to Web3Forms (delivered by email); also kept in localStorage for the queue counter
     const CORE_KEY = 'tyrian.coreApplications';
+    const WEB3FORMS_KEY = 'e449ad0b-6c2a-4152-9d5d-5ef0685a746c';
     const readApps = () => {
       try { return JSON.parse(localStorage.getItem(CORE_KEY) || '[]'); }
       catch { return []; }
@@ -323,6 +324,22 @@
       const apps = readApps();
       apps.push(application);
       writeApps(apps);
+
+      // Send the application to Web3Forms (arrives by email). Fire-and-forget so the UX stays instant.
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'New TYRIAN core team application — ' + (application.name || 'unknown'),
+          from_name: 'TYRIAN Core Team',
+          name: application.name,
+          email: application.email,
+          'Who are you': application.who,
+          'Why TYRIAN': application.why,
+          'Proof of build': application.proof,
+        }),
+      }).catch(() => {});
 
       form.style.opacity = '0.4';
       form.style.pointerEvents = 'none';

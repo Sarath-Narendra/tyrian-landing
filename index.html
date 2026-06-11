@@ -604,7 +604,7 @@
               <button class="btn btn-primary" type="submit" style="padding:18px 28px;">Join the Waitlist →</button>
               <span id="waitlistCount" class="label-mono text-ink-mute"></span>
             </div>
-            <p class="label-mono text-ink-mute pt-6 leading-[1.6]">By submitting, you acknowledge that there is no turning back.<br/>Your email is stored locally in this browser as a demo. Wire to a backend or a service like Formspree / Resend for production.</p>
+            <p class="label-mono text-ink-mute pt-6 leading-[1.6]">By submitting, you acknowledge that there is no turning back.<br/>We'll only use your email to tell you when the next wave opens. No spam.</p>
           </form>
           <div id="waitlistSuccess" class="hidden border border-tyrian p-10 md:p-12 mt-2 bg-white">
             <div class="flex items-center gap-3 mb-6">
@@ -750,8 +750,9 @@
       const timer = setInterval(tick, 1000);
     })();
 
-    // Waitlist form — stores emails in localStorage under "tyrian.waitlist"
+    // Waitlist form — submits to Web3Forms (delivered by email); keeps a local copy in localStorage for the live counter
     const WAITLIST_KEY = 'tyrian.waitlist';
+    const WEB3FORMS_KEY = 'e449ad0b-6c2a-4152-9d5d-5ef0685a746c';
     const readWaitlist = () => {
       try { return JSON.parse(localStorage.getItem(WAITLIST_KEY) || '[]'); }
       catch { return []; }
@@ -783,6 +784,18 @@
         return;
       }
       waitlistError.classList.add('hidden');
+
+      // Send the signup to Web3Forms (arrives by email). Fire-and-forget so the UX stays instant.
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'New TYRIAN waitlist signup',
+          from_name: 'TYRIAN Waitlist',
+          email,
+        }),
+      }).catch(() => {});
 
       const list = readWaitlist();
       let pos;
